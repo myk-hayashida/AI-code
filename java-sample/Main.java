@@ -6,6 +6,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
+        String muiminahensuu = "テスト用に無意味な変数を追加します";
+
         System.out.println("じゃんけんゲームを始めます。");
         System.out.println("1: グー, 2: チョキ, 3: パー を選んでください。");
         System.out.println("数字を入力してください（例: 1）:");
