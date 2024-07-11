@@ -86,7 +86,7 @@ public class Main {
 
     private static boolean playAgain(Scanner scanner) {
         System.out.print("もう一度遊ぶ場合は y を入力してください。終了する場合はそれ以外のキーを押してください: ");
-        String answer = scanner.next();
+        String answer = scanner.next();;//test
         return answer.equalsIgnoreCase("y");
     }
 }
