@@ -10,14 +10,16 @@ public class Main {
         System.out.println("1: グー, 2: チョキ, 3: パー を選んでください。");
         System.out.println("数字を入力してください（例: 1）:");
 
-        while (true) {
-            System.out.print("あなたの手を選んでください: ");
-            int playerHand = scanner.nextInt();
+        playJanken(scanner, random);
 
-            if (playerHand < 1 || playerHand > 3) {
-                System.out.println("無効な選択です。1から3の数字を選んでください。");
-                continue;
-            }
+        System.out.println("ゲームを終了します。");
+        scanner.close();
+        random.close(); // Java 7以降の場合、try-with-resourcesで自動的にクローズされる
+    }
+
+    private static void playJanken(Scanner scanner, Random random) {
+        while (true) {
+            int playerHand = getPlayerHand(scanner);
 
             int computerHand = random.nextInt(3) + 1;
 
@@ -26,27 +28,27 @@ public class Main {
 
             int result = judge(playerHand, computerHand);
 
-            if (result == 0) {
-                System.out.println("引き分けです。");
-            } else if (result == 1) {
-                System.out.println("あなたの勝ちです！");
-            } else {
-                System.out.println("コンピュータの勝ちです。");
-            }
+            displayResult(result);
 
-            System.out.print("もう一度遊ぶ場合は y を入力してください。終了する場合はそれ以外のキーを押してください: ");
-            String answer = scanner.next();
-
-            if (!answer.equalsIgnoreCase("y")) {
+            if (!playAgain(scanner)) {
                 break;
             }
         }
-
-        System.out.println("ゲームを終了します。");
-        scanner.close();
     }
 
-    // 数字を手の名前に変換するメソッド
+    private static int getPlayerHand(Scanner scanner) {
+        while (true) {
+            System.out.print("あなたの手を選んでください: ");
+            int playerHand = scanner.nextInt();
+
+            if (playerHand < 1 || playerHand > 3) {
+                System.out.println("無効な選択です。1から3の数字を選んでください。");
+            } else {
+                return playerHand;
+            }
+        }
+    }
+
     private static String handToString(int hand) {
         switch (hand) {
             case 1:
@@ -60,7 +62,6 @@ public class Main {
         }
     }
 
-    // じゃんけんの判定を行うメソッド
     private static int judge(int playerHand, int computerHand) {
         if (playerHand == computerHand) {
             return 0; // 引き分け
@@ -71,5 +72,21 @@ public class Main {
         } else {
             return -1; // コンピュータの勝ち
         }
+    }
+
+    private static void displayResult(int result) {
+        if (result == 0) {
+            System.out.println("引き分けです。");
+        } else if (result == 1) {
+            System.out.println("あなたの勝ちです！");
+        } else {
+            System.out.println("コンピュータの勝ちです。");
+        }
+    }
+
+    private static boolean playAgain(Scanner scanner) {
+        System.out.print("もう一度遊ぶ場合は y を入力してください。終了する場合はそれ以外のキーを押してください: ");
+        String answer = scanner.next();
+        return answer.equalsIgnoreCase("y");
     }
 }
