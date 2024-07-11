@@ -16,7 +16,7 @@ public class Main {
 
         System.out.println("ゲームを終了します。");
         scanner.close();
-        random.close(); // Java 7以降の場合、try-with-resourcesで自動的にクローズされる
+        // random.close(); // Java 7以降の場合、try-with-resourcesで自動的にクローズされる
     }
 
     private static void playJanken(Scanner scanner, Random random) {
