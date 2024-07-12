@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class JankenGameLauncher {
     public static void main(String[] args) {
+        double tensuu = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             JankenGame game = new JankenGame(scanner);
             game.start();
